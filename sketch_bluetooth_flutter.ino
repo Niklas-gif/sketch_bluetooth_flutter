@@ -12,8 +12,16 @@ void lcdInit(LCD_I2C *lcd) {
   lcd->backlight();
 }
 
+void BluetoothInit(SoftwareSerial *BTSerial) {
+  BTSerial->begin(38400);
+}
+
 void setup() {
   lcdInit(&lcd);
+  pinMode(9, OUTPUT);
+  digitalWrite(9, HIGH);
+  Serial.begin(38400);
+  BluetoothInit(&BTSerial);
   lcd.print("Hello, world!");
 }
 
