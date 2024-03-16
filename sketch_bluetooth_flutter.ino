@@ -18,7 +18,7 @@ void BluetoothInit(SoftwareSerial *BTSerial) {
 
 void setup() {
   lcdInit(&lcd);
-  pinMode(9, OUTPUT);
+  pinMode(9, OUTPUT); //<-- Connect Pin 9 to [ET] for configuration of the hc-05 moudle
   digitalWrite(9, HIGH);
   Serial.begin(38400);
   BluetoothInit(&BTSerial);
@@ -26,6 +26,12 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  if (Serial.available()) {
+       BTSerial.write(Serial.read());
+    }
+ 
+  if (BTSerial.available()) {
+       Serial.write(BTSerial.read());
+    }
 
 }
