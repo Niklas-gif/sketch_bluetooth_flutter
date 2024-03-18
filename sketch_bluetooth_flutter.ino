@@ -47,20 +47,18 @@ void setup() {
   digitalWrite(9, HIGH);
   Serial.begin(38400);
   BTSerial.begin(38400);
-  //lcd.print("Hello, world!");
   testDisplay(&lcd,'0');
 }
 
 void loop() {
   if (Serial.available()) {
-       BTSerial.write(Serial.read());
+      BTSerial.write(Serial.read());
     }
  
   if (BTSerial.available()) {
-    char incomingChar = BTSerial.read();
-      Serial.println(incomingChar);
-       Serial.write(incomingChar);
-       testDisplay(&lcd, '2');
+      char incomingChar = BTSerial.read();
+      Serial.write(incomingChar);
+      testDisplay(&lcd, incomingChar);
     }
 
 }
